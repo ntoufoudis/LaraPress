@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
     public function __invoke()
     {
-        return view('admin.categories');
+        return view('admin.tags');
     }
 }

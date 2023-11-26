@@ -1,17 +1,17 @@
 <?php
 /**
- * @noinspection PhpMissingReturnTypeInspection
  * @noinspection PhpVoidFunctionResultUsedInspection
+ * @noinspection PhpMissingReturnTypeInspection
  */
 
 namespace App\Livewire\Admin;
 
-use App\Models\Category;
+use App\Models\Tag;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class CategoriesIndex extends Component
+class TagsIndex extends Component
 {
     use WithPagination;
 
@@ -39,7 +39,7 @@ class CategoriesIndex extends Component
 
     public function mount()
     {
-        $setOfIds = Category::pluck('id')->toArray();
+        $setOfIds = Tag::pluck('id')->toArray();
         $this->checkboxes = array_fill_keys($setOfIds, false);
     }
 
@@ -48,9 +48,9 @@ class CategoriesIndex extends Component
         $this->resetPage();
     }
 
-    public function deleteCategory(Category $category): void
+    public function deleteTag(Tag $tag): void
     {
-        $category->delete();
+        $tag->delete();
     }
 
     public function massDelete()
@@ -62,16 +62,16 @@ class CategoriesIndex extends Component
         $checkboxes = array_keys($checkboxes);
 
         foreach ($checkboxes as $checkbox) {
-            Category::find($checkbox)->delete();
+            Tag::find($checkbox)->delete();
         }
 
-        return $this->redirect(route('category.index'), navigate: true);
+        return $this->redirect(route('tag.index'), navigate: true);
     }
 
     public function render()
     {
-        return view('livewire.admin.categories-index', [
-            'categories' => Category::when(strlen($this->search) >= 3, function ($query) {
+        return view('livewire.admin.tags-index', [
+            'tags' => Tag::when(strlen($this->search) >= 3, function ($query) {
                 return $query->where('name', 'like', '%'.$this->search.'%');
             })
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
