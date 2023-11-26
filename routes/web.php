@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -66,6 +67,14 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 });
 
+// Admin Routes
+
+Route::middleware('auth')->group(function () {
+    Route::get('admin/categories', [CategoryController::class, 'index'])->name('category.index');
+
+});
 Route::get('admin', function () {
     return view('admin.categories');
 });
+Route::get('admin/categories/create', [CategoryController::class, 'create'])->name('category.create');
+Route::post('/admin/categories', [CategoryController::class, 'store'])->name('category.store');
