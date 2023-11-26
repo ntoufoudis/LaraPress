@@ -1,12 +1,33 @@
 <div class="bg-white flex flex-col rounded  h-28 px-2 w-full">
-    <h2 class="text-2xl font-bold mb-6">Categories</h2>
+    <div class="flex items-center justify-between mx-4 mt-2">
+        <h2 class="text-2xl font-bold mb-6">Categories</h2>
+        <div class="flex items-center">
+            <div class="flex items-center ms-3">
+                <div>
+                    <button
+                        type="button"
+                        class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
+                    >
+                        <span class="sr-only">Open user menu</span>
+                        <img
+                            class="w-8 h-8 rounded-full"
+                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                            alt="user photo"
+                        >
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="flex items-center justify-end h-16 mb-4 rounded bg-gray-50">
         <x-admin.search-form name="search"/>
     </div>
     <div class="flex items-center justify-between p-4">
         <div class="flex items-center space-x-2">
             <label>
-                <select class="border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 p-2.5
+                <select
+                    wire:model.live="bulkActions"
+                    class="border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 p-2.5
                             focus:border-blue-500 focus:ring-2 focus:outline-none bg-white"
                 >
                     <option value="Bulk actions">Bulk Actions</option>
@@ -14,6 +35,10 @@
                 </select>
             </label>
             <button
+                @if ($this->bulkActions === 'delete')
+                wire:click.prevent="massDelete"
+                wire:confirm="You are about to delete these items from your site. Are you sure?"
+                @endif
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
                         font-medium rounded-lg text-sm px-5 py-2 text-center"
             >Apply</button>
@@ -27,7 +52,7 @@
         </div>
         <div class="flex items-center justify-center space-x-4">
             <div>
-                <p>{{ $count }} @if ($count > 1) Items @else Item @endif</p>
+                <p>{{ $categories->total() }} @if ($categories->total() > 1) Items @else Item @endif</p>
             </div>
         </div>
     </div>
@@ -48,13 +73,67 @@
                             </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Name
+                            <div class="flex items-center">
+                                Name
+                                <a wire:click.prevent="sortBy('name')" href="#">
+                                    <svg
+                                        class="w-4 h-4 ms-1.5"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0
+                                                0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0
+                                                0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072
+                                                2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123
+                                                0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0
+                                                0-1.846-1.087Z"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Description
+                            <div class="flex items-center">
+                                Description
+                                <a wire:click.prevent="sortBy('description')" href="#">
+                                    <svg
+                                        class="w-4 h-4 ms-1.5"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0
+                                                0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0
+                                                0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072
+                                                2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123
+                                                0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0
+                                                0-1.846-1.087Z"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Slug
+                            <div class="flex items-center">
+                                Slug
+                                <a wire:click.prevent="sortBy('slug')" href="#">
+                                    <svg
+                                        class="w-4 h-4 ms-1.5"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0
+                                                0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0
+                                                0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072
+                                                2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123
+                                                0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0
+                                                0-1.846-1.087Z"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Count
@@ -67,6 +146,7 @@
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
                                     <input
+                                        wire:model="checkboxes.{{ $category->id }}"
                                         id="checkbox-table-1"
                                         type="checkbox"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded
@@ -89,7 +169,13 @@
                                     </a>
                                     <a class="text-blue-500 text-xs font-medium pr-1 pl-2">View</a>
                                     <a class="text-red-500 text-xs font-medium pl-2">
-                                        <button wire:click.prevent="deleteCategory({{ $category }})" type="button">Delete</button>
+                                        <button
+                                            wire:click.prevent="deleteCategory({{ $category }})"
+                                            wire:confirm="You are about to delete these items from your site. Are you sure?"
+                                            type="button"
+                                        >
+                                            Delete
+                                        </button>
                                     </a>
                                 </div>
                             </th>

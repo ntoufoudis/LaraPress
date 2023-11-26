@@ -63,14 +63,24 @@ it('cannot search when less than 3 characters', function () {
         });
 });
 
-it('can show category create form when logged in', function () {
-
-});
-
-it('can validate input', function () {
-    loginAsUser();
-
-    Livewire::->test(CategoriesIndex::class)
-        ->set('name', '')
-        ->call('')
-});
+//it('contains create category modal', function () {
+//    loginAsUser();
+//
+//    Livewire::test(\App\Livewire\Admin\CategoryModal::class)
+//        ->dispatch('openModal', 'admin.category-modal')
+//        ->assertOk();
+//});
+//
+//it('can show category create form when logged in', function () {
+//    loginAsUser();
+//
+//
+//});
+//
+//it('can validate input', function () {
+//    loginAsUser();
+//
+//    Livewire::->test(CategoriesIndex::class)
+//        ->set('name', '')
+//        ->call('')
+//});
