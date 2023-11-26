@@ -9,10 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.categories', [
-            'categories' => Category::paginate(10),
-            'count' => Category::count(),
-        ]);
+        return view('admin.categories');
     }
 
     public function store()

@@ -24,18 +24,19 @@
         {{--                    }--}}
         {{--                </script>--}}
         <!-- End Theme Toggle Script -->
-
+{{--    @livewireStyles--}}
+        @livewire('wire-elements-modal')
     </head>
-    <body class="bg-[#F4F4F4] text-[#333333] h-screen">
+    <body class="bg-light-background text-light-text h-screen">
         <x-admin.header/>
 
         <x-admin.sidebar/>
 
         <div class="p-4 sm:ml-64">
-            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg mt-14">
+            <div class="p-4 mt-12">
                 {{ $slot }}
             </div>
         </div>
-
+{{--@livewireScripts--}}
     </body>
 </html>
