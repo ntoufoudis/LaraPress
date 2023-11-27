@@ -51,12 +51,7 @@ class User extends Authenticatable
         'roles',
     ];
 
-    protected $appends = ['name', 'displayName', 'role'];
-
-    protected function getNameAttribute()
-    {
-        return $this->username;
-    }
+    protected $appends = ['displayName', 'role'];
 
     protected function getDisplayNameAttribute()
     {

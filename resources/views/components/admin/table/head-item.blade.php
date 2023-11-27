@@ -1,7 +1,7 @@
 @props(['name', 'sortable' => false, 'type' => 'header', '$sortField'])
 
 @if($type === 'checkbox')
-    <th scope="col" class="px-6 py-4">
+    <th scope="col" class="px-6 py-4 w-16">
         <div class="flex items-center">
             <label>
                 <input
@@ -14,7 +14,7 @@
         </div>
     </th>
 @else
-    <th scope="col" class="px-6 py-3">
+    <th scope="col" class="px-6 py-3 w-52">
         <div class="flex items-center">
             {{ ucwords($name) }}
             @if($sortable)

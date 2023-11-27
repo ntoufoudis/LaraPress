@@ -65,7 +65,8 @@ class UsersIndex extends Component
             User::find($checkbox)->delete();
         }
 
-        return redirect()->back();
+        $this->checkboxes = [];
+        $this->bulkActions = '';
     }
 
     public function render()

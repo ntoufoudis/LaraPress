@@ -12,24 +12,28 @@
             <x-admin.table>
                 <x-slot name="head">
                     <x-admin.table.head-item name="checkbox" type="checkbox"/>
-                    <x-admin.table.head-item name="name" sortable="true"/>
-                    <x-admin.table.head-item name="description" sortable="true"/>
-                    <x-admin.table.head-item name="slug" sortable="true"/>
+                    <x-admin.table.head-item name="name" sortable="true" sort-field="name"/>
+                    <x-admin.table.head-item name="description" sortable="true" sort-field="description"/>
+                    <x-admin.table.head-item name="slug" sortable="true" sort-field="slug"/>
                     <x-admin.table.head-item name="count"/>
                 </x-slot>
-                <x-slot name="data">
-                    <x-admin.table.row
-                        :for="$categories"
-                        as="$category"
-                        empty-span="5"
-                        empty-message="No Categories found."
-                        :data="['id', 'name', 'description', 'slug', '0']"
-                        component="'admin.category-modal'"
-                        arguments="category: "
-                        delete-method="deleteCategory"
-                    >
+                @forelse($categories as $category)
+                    <x-admin.table.row :key="$category->id">
+                        <x-admin.table.row-item :value="$category->id" type="checkbox"/>
+                        <x-admin.table.row-item
+                            :value="$category->name"
+                            type="links"
+                            component="'admin.category-modal'"
+                            :arguments="'category: ' . $category->id"
+                            :delete-method="'deleteCategory('.$category->id.')'"
+                        />
+                        <x-admin.table.row-item :value="$category->description"/>
+                        <x-admin.table.row-item :value="$category->slug"/>
+                        <x-admin.table.row-item value="0"/>
                     </x-admin.table.row>
-                </x-slot>
+                @empty
+                    <x-admin.table.row-item type="empty" empty-span="6" empty-message="No Categories Found."/>
+                @endforelse
             </x-admin.table>
             <div class="px-2 py-4">{{ $categories->links() }}</div>
         </div>

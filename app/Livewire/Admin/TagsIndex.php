@@ -67,7 +67,8 @@ class TagsIndex extends Component
             Tag::find($checkbox)->delete();
         }
 
-        return redirect()->back();
+        $this->checkboxes = [];
+        $this->bulkActions = '';
     }
 
     public function render()

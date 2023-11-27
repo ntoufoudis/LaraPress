@@ -19,28 +19,25 @@
                     <x-admin.table.head-item name="comments"/>
                     <x-admin.table.head-item name="date"/>
                 </x-slot>
-
-
-                    @forelse($posts as $post)
-                        <x-admin.table.row :key="$post->id">
-                            <x-admin.table.row-item :value="$post->id" type="checkbox"/>
-                            <x-admin.table.row-item
-                                :value="$post->title"
-                                type="links"
-                                component="admin.post-modal"
-                                :arguments="'post: ' . $post->id"
-                                :delete-method="'deletePost('.$post->id.')'"
-                            />
-                            <x-admin.table.row-item :value="$post->author->name"/>
-                            <x-admin.table.row-item :value="$post->category->name"/>
-                            <x-admin.table.row-item :value="$post->tag->name"/>
-                            <x-admin.table.row-item value="0"/>
-                            <x-admin.table.row-item value="0"/>
-                        </x-admin.table.row>
+                @forelse($posts as $post)
+                    <x-admin.table.row :key="$post->id">
+                        <x-admin.table.row-item :value="$post->id" type="checkbox"/>
+                        <x-admin.table.row-item
+                            :value="$post->title"
+                            type="links"
+                            component="admin.post-modal"
+                            :arguments="'post: ' . $post->id"
+                            :delete-method="'deletePost('.$post->id.')'"
+                        />
+                        <x-admin.table.row-item :value="$post->author->name"/>
+                        <x-admin.table.row-item :value="$post->category->name"/>
+                        <x-admin.table.row-item :value="$post->tag->name"/>
+                        <x-admin.table.row-item value="0"/>
+                        <x-admin.table.row-item value="0"/>
+                    </x-admin.table.row>
                 @empty
                     <x-admin.table.row-item type="empty" empty-span="6" empty-message="No Posts Found."/>
                 @endforelse
-
             </x-admin.table>
             <div class="px-2 py-4">{{ $posts->links() }}</div>
         </div>

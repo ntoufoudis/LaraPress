@@ -12,25 +12,30 @@
             <x-admin.table>
                 <x-slot name="head">
                     <x-admin.table.head-item name="checkbox" type="checkbox"/>
-                    <x-admin.table.head-item name="username" sortable="true"/>
-                    <x-admin.table.head-item name="name" sortable="true"/>
-                    <x-admin.table.head-item name="email" sortable="true"/>
-                    <x-admin.table.head-item name="role" sortable="true"/>
+                    <x-admin.table.head-item name="username" sortable="true" sort-field="username"/>
+                    <x-admin.table.head-item name="email" sortable="true" sort-field="email"/>
+                    <x-admin.table.head-item name="name"/>
+                    <x-admin.table.head-item name="role"/>
                     <x-admin.table.head-item name="posts"/>
                 </x-slot>
-                <x-slot name="data">
-                    <x-admin.table.row
-                        :for="$users"
-                        as="$user"
-                        empty-span="6"
-                        empty-message="No Users found."
-                        :data="['id', 'name', 'displayName', 'email', 'role', '0']"
-                        component="'admin.user-modal'"
-                        arguments="user: "
-                        delete-method="deleteUser"
-                    >
+                @forelse($users as $user)
+                    <x-admin.table.row :key="$user->id">
+                        <x-admin.table.row-item :value="$user->id" type="checkbox"/>
+                        <x-admin.table.row-item
+                            :value="$user->username"
+                            type="links"
+                            component="'admin.user-modal'"
+                            :arguments="'user: ' . $user->id"
+                            :delete-method="'deleteUser('.$user->id.')'"
+                        />
+                        <x-admin.table.row-item :value="$user->email"/>
+                        <x-admin.table.row-item :value="$user->display_name"/>
+                        <x-admin.table.row-item :value="$user->role"/>
+                        <x-admin.table.row-item value="0"/>
                     </x-admin.table.row>
-                </x-slot>
+                @empty
+                    <x-admin.table.row-item type="empty" empty-span="6" empty-message="No Users Found."/>
+                @endforelse
             </x-admin.table>
             <div class="px-2 py-4">{{ $users->links() }}</div>
         </div>
