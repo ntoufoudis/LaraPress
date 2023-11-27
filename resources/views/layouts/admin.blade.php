@@ -28,13 +28,13 @@
         @livewire('wire-elements-modal')
     </head>
     <body
-        class="bg-light-background text-light-text h-screen"
+        class="bg-[#F0F0F1] text-light-text h-screen"
     >
-{{--        <x-admin.header/>--}}
+        <x-admin.header/>
 
         <x-admin.sidebar/>
 
-        <div class="p-4 sm:ml-64">
+        <div class="pl-5 sm:ml-40">
             <div class="p-4">
                 {{ $slot }}
             </div>

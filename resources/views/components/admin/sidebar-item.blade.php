@@ -3,10 +3,10 @@
     <a
         wire:navigate
         href="{{ $href }}"
-        class="flex items-center p-2 rounded-lg hover:bg-gray-100 group"
+        class="text-[#F0F0F1] flex items-center p-2 rounded-lg hover:text-[#72AEE6] group {{ '/'.request()->path() === $href ? 'bg-[#2271B1]' : '' }}"
     >
         <svg
-            class="flex-shrink-0 w-5 h-5 transition duration-75 group-hover:text-gray-900"
+            class="flex-shrink-0 w-5 h-5 transition duration-75"
             fill="currentColor"
             viewBox="0 0 18 20"
         >

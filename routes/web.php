@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,13 +72,9 @@ Route::middleware('guest')->group(function () {
 // Admin Routes
 
 Route::middleware('auth')->group(function () {
-//    Route::get('admin/categories', [CategoryController::class, 'index'])->name('category.index');
-//
-//});
-//Route::get('admin', function () {
-//    return view('admin.categories');
-//});
-//Route::get('admin/categories/create', [CategoryController::class, 'create'])->name('category.create');
-    Route::get('/admin/categories', CategoryController::class)->name('category.index');
-    Route::get('/admin/tags', TagController::class)->name('tag.index');
+    Route::prefix('admin')->group(function () {
+        Route::get('/categories', CategoryController::class)->name('category.index');
+        Route::get('/tags', TagController::class)->name('tag.index');
+        Route::get('/users', UserController::class)->name('user.index');
+    });
 });

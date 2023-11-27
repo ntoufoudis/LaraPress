@@ -1,32 +1,31 @@
 <aside
-    class="fixed top-0 left-0 pt-4 z-40 w-64 h-screen transition-transform -translate-x-full border-r
-        border-gray-200 sm:translate-x-0"
+    class="fixed bg-[#1D2327] top-0 left-0 pt-20 z-40 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0"
 >
     <div class="flex items-center justify-between ml-4 mb-8">
-        <div class="flex items-center justify-start">
-            <button
-                type="button"
-                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100
-                        focus:outline-none focus:ring-2 focus:ring-gray-200"
-            >
-                <span class="sr-only">Open sidebar</span>
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        clip-rule="evenodd"
-                        fill-rule="evenodd"
-                        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0
-                                01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0
-                                01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-                    />
-                </svg>
-            </button>
-            <a href="#" class="flex ms-2 md:me-24">
-                <img src="{{ asset('img/logo.png') }}" class="h-8 me-3" alt="LaraPress Logo"/>
-                <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">
-                        {{ config('app.name') }}
-                    </span>
-            </a>
-        </div>
+{{--        <div class="flex items-center justify-start">--}}
+{{--            <button--}}
+{{--                type="button"--}}
+{{--                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100--}}
+{{--                        focus:outline-none focus:ring-2 focus:ring-gray-200"--}}
+{{--            >--}}
+{{--                <span class="sr-only">Open sidebar</span>--}}
+{{--                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">--}}
+{{--                    <path--}}
+{{--                        clip-rule="evenodd"--}}
+{{--                        fill-rule="evenodd"--}}
+{{--                        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0--}}
+{{--                                01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0--}}
+{{--                                01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"--}}
+{{--                    />--}}
+{{--                </svg>--}}
+{{--            </button>--}}
+{{--            <a href="#" class="flex ms-2 md:me-24">--}}
+{{--                <img src="{{ asset('img/logo.png') }}" class="h-8 me-3" alt="LaraPress Logo"/>--}}
+{{--                <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">--}}
+{{--                        {{ config('app.name') }}--}}
+{{--                    </span>--}}
+{{--            </a>--}}
+{{--        </div>--}}
 {{--        <div class="flex items-center">--}}
 {{--            <div class="flex items-center ms-3">--}}
 {{--                <!-- Theme Toggle Button -->--}}
@@ -116,16 +115,16 @@
 
     <div class="h-full px-3 pb-4 overflow-y-auto">
         <ul class="space-y-2 font-medium">
-            <x-admin.sidebar-item name="dashboard" href="/admin">
-            <x-admin.sidebar-item name="kanban" class="px-2 text-gray-800 bg-gray-100" href="/admin"/>
+            <x-admin.sidebar-item name="dashboard" href="admin"/>
+            <x-admin.sidebar-item name="kanban" class="px-2 text-gray-800 bg-gray-100" href="admin">
                 Pro
             </x-admin.sidebar-item>
 
-            <x-admin.sidebar-item name="inbox" class="w-3 h-3 p-3 text-blue-800 bg-blue-100" href="/admin">
+            <x-admin.sidebar-item name="inbox" class="w-3 h-3 p-3 text-blue-800 bg-blue-100" href="admin">
                 3
             </x-admin.sidebar-item>
-            <x-admin.sidebar-item name="users" href="/admin"/>
-            <x-admin.sidebar-item name="products" href="/admin"/>
+            <x-admin.sidebar-item name="users" href="/admin/users"/>
+            <x-admin.sidebar-item name="products" href="admin"/>
             <x-admin.sidebar-item name="categories" href="/admin/categories"/>
             <x-admin.sidebar-item name="tags" href="/admin/tags"/>
         </ul>

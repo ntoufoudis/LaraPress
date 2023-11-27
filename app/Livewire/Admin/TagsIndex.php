@@ -25,6 +25,7 @@ class TagsIndex extends Component
     public $sortField = 'name';
 
     public $sortAsc = true;
+    public $route;
 
     public function sortBy($field)
     {
@@ -41,6 +42,7 @@ class TagsIndex extends Component
     {
         $setOfIds = Tag::pluck('id')->toArray();
         $this->checkboxes = array_fill_keys($setOfIds, false);
+        $this->route = url()->previous();
     }
 
     public function updatingSearch(): void
@@ -65,7 +67,7 @@ class TagsIndex extends Component
             Tag::find($checkbox)->delete();
         }
 
-        return $this->redirect(route('tag.index'), navigate: true);
+        return redirect()->back();
     }
 
     public function render()
