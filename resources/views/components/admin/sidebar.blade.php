@@ -116,6 +116,12 @@
     <div class="h-full px-3 pb-4 overflow-y-auto">
         <ul class="space-y-2 font-medium">
             <x-admin.sidebar-item name="dashboard" href="admin"/>
+            <x-admin.sidebar-item name="posts" href="/admin/posts"/>
+            <x-admin.sidebar-item name="users" href="/admin/users"/>
+            <x-admin.sidebar-item name="categories" href="/admin/categories"/>
+            <x-admin.sidebar-item name="tags" href="/admin/tags"/>
+            <x-admin.sidebar-item name="trash" href="/admin/trash"/>
+            <x-admin.sidebar-item name="products" href="admin"/>
             <x-admin.sidebar-item name="kanban" class="px-2 text-gray-800 bg-gray-100" href="admin">
                 Pro
             </x-admin.sidebar-item>
@@ -123,10 +129,7 @@
             <x-admin.sidebar-item name="inbox" class="w-3 h-3 p-3 text-blue-800 bg-blue-100" href="admin">
                 3
             </x-admin.sidebar-item>
-            <x-admin.sidebar-item name="users" href="/admin/users"/>
-            <x-admin.sidebar-item name="products" href="admin"/>
-            <x-admin.sidebar-item name="categories" href="/admin/categories"/>
-            <x-admin.sidebar-item name="tags" href="/admin/tags"/>
+
         </ul>
     </div>
 </aside>
