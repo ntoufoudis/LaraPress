@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Category;
-use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,10 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionsSeeder::class,
             UsersSeeder::class,
+            PostsSeeder::class,
         ]);
-
-        Category::factory(50)->create();
-        Tag::factory(50)->create();
-
     }
 }

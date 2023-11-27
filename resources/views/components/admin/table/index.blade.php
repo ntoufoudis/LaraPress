@@ -1,9 +1,9 @@
-<table class="w-full text-sm text-left text-gray-500">
+<table class="text-sm text-left text-gray-500 table-fixed">
     <x-admin.table.head>
         {{ $head }}
     </x-admin.table.head>
+    <tbody>
+        {{ $slot }}
+    </tbody>
 
-{{--    <x-admin.table.row>--}}
-        {{ $data }}
-{{--    </x-admin.table.row>--}}
 </table>

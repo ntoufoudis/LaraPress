@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -9,10 +13,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TagController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,5 +77,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/categories', CategoryController::class)->name('category.index');
         Route::get('/tags', TagController::class)->name('tag.index');
         Route::get('/users', UserController::class)->name('user.index');
+        Route::get('/posts', PostController::class)->name('post.index');
     });
 });

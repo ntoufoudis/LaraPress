@@ -1,4 +1,4 @@
-@props(['name', 'sortable' => false, 'type' => 'header'])
+@props(['name', 'sortable' => false, 'type' => 'header', '$sortField'])
 
 @if($type === 'checkbox')
     <th scope="col" class="px-6 py-4">
@@ -18,7 +18,7 @@
         <div class="flex items-center">
             {{ ucwords($name) }}
             @if($sortable)
-                <a wire:click.prevent="sortBy('{{ $name }}')" href="#">
+                <a wire:click.prevent="sortBy('{{ $sortField }}')" href="#">
                     <svg class="w-4 h-4 ms-1.5" fill="currentColor" viewBox="0 0 24 24">
                         <x-icons name="sortable"/>
                     </svg>

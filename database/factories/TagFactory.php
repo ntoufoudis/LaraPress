@@ -13,8 +13,8 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->word(),
-            'slug' => fake()->unique()->word(),
+            'name' => $this->faker->word(),
+            'slug' => $this->faker->word(),
             'created_at' => Carbon::now(), //
             'updated_at' => Carbon::now(),
         ];

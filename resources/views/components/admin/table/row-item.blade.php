@@ -1,4 +1,10 @@
-@props(['type' => 'item', 'value', 'component', 'arguments', 'deleteMethod'])
+@props([
+    'type' => 'item',
+    'value',
+    'component',
+    'arguments',
+    'deleteMethod'
+])
 
 @if($type === 'checkbox')
     <td class="w-4 px-6 py-4">
@@ -12,8 +18,8 @@
             <label for="checkbox-table-1" class="sr-only">checkbox</label>
         </div>
     </td>
-@elseif($type === 'name')
-    <th scope="row" class="group px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+@elseif($type === 'links')
+    <th scope="row" class="group px-6 py-4 font-medium text-gray-900">
         {{ $value }}
         <div class="hidden group-hover:block divide-x divide-red-500">
             <a class="text-blue-500 text-xs font-medium pr-1">
@@ -35,8 +41,14 @@
             </a>
         </div>
     </th>
-@else
-    <td class="px-6 py-4">
+@elseif($type === 'item')
+    <th scope="row" class="group px-6 py-4 font-medium text-gray-900">
         {{ $value }}
-    </td>
+    </th>
+@elseif($type === 'empty')
+    <tr class="bg-white border-b hover:bg-gray-50">
+        <th colspan="{{ $emptySpan }}" class="px-6 py-4 font-medium text-gray-900 text-center">
+            {{ $emptyMessage }}
+        </th>
+    </tr>
 @endif
