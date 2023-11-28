@@ -4,7 +4,7 @@
         <x-admin.search-form name="search"/>
     </div>
     <div class="flex items-center justify-between p-4">
-        <x-admin.bulk-actions/>
+        <x-admin.mass-delete/>
         <x-admin.create-button name="Create Post" component="'admin.post-modal'"/>
     </div>
     <div>
@@ -27,7 +27,7 @@
                             type="links"
                             component="admin.post-modal"
                             :arguments="'post: ' . $post->id"
-                            :delete-method="'deletePost('.$post->id.')'"
+                            :delete-method="'deleteSingle('.$post->id.')'"
                         />
                         <x-admin.table.row-item :value="$post->author->name"/>
                         <x-admin.table.row-item :value="$post->category->name"/>

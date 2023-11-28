@@ -4,7 +4,7 @@
         <x-admin.search-form name="search"/>
     </div>
     <div class="flex items-center justify-between p-4">
-        <x-admin.bulk-actions/>
+        <x-admin.mass-delete/>
         <x-admin.create-button name="Create User" component="'admin.user-modal'"/>
     </div>
     <div>
@@ -26,7 +26,7 @@
                             type="links"
                             component="'admin.user-modal'"
                             :arguments="'user: ' . $user->id"
-                            :delete-method="'deleteUser('.$user->id.')'"
+                            :delete-method="'deleteSingle('.$user->id.')'"
                         />
                         <x-admin.table.row-item :value="$user->email"/>
                         <x-admin.table.row-item :value="$user->display_name"/>

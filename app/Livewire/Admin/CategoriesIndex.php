@@ -6,77 +6,27 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\Category;
-use Livewire\Attributes\Url;
+use App\Traits\LaraPress;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class CategoriesIndex extends Component
 {
-    use WithPagination;
+    use LaraPress;
 
-    #[Url(as: 's')]
-    public $search = '';
-
-    public array $checkboxes;
-
-    public $bulkActions;
-
-    public $sortField = 'name';
-
-    public $sortAsc = true;
-
-    public function sortBy($field)
+    public function deleteSingle($id)
     {
-        if ($this->sortField === $field) {
-            $this->sortAsc = ! $this->sortAsc;
-        } else {
-            $this->sortAsc = true;
-        }
-
-        $this->sortField = $field;
-    }
-
-    public function mount()
-    {
-        $setOfIds = Category::pluck('id')->toArray();
-        $this->checkboxes = array_fill_keys($setOfIds, false);
-    }
-
-    public function updatingSearch(): void
-    {
-        $this->resetPage();
-    }
-
-    public function deleteCategory(Category $category): void
-    {
-        $category->delete();
+        $this->deleteItem('category', $id);
     }
 
     public function massDelete()
     {
-        $checkboxes = $this->checkboxes;
-        $checkboxes = array_filter($checkboxes, function ($value) {
-            return $value !== false;
-        });
-        $checkboxes = array_keys($checkboxes);
-
-        foreach ($checkboxes as $checkbox) {
-            Category::find($checkbox)->delete();
-        }
-
-        $this->checkboxes = [];
-        $this->bulkActions = '';
+        $this->deleteSelected('category');
     }
 
     public function render()
     {
         return view('livewire.admin.categories-index', [
-            'categories' => Category::when(strlen($this->search) >= 3, function ($query) {
-                return $query->where('name', 'like', '%'.$this->search.'%');
-            })
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->paginate(10),
+            'categories' => $this->renderItems('categories', 2),
         ]);
     }
 }

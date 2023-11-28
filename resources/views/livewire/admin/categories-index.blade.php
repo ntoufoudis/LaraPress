@@ -4,7 +4,7 @@
         <x-admin.search-form name="search"/>
     </div>
     <div class="flex items-center justify-between p-4">
-        <x-admin.bulk-actions/>
+        <x-admin.mass-delete/>
         <x-admin.create-button name="Create Category" component="'admin.category-modal'"/>
     </div>
     <div>
@@ -25,7 +25,8 @@
                             type="links"
                             component="'admin.category-modal'"
                             :arguments="'category: ' . $category->id"
-                            :delete-method="'deleteCategory('.$category->id.')'"
+                            :delete-method="'deleteSingle('.$category->id.')'"
+
                         />
                         <x-admin.table.row-item :value="$category->description"/>
                         <x-admin.table.row-item :value="$category->slug"/>

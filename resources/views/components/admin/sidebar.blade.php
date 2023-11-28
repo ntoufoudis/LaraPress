@@ -120,7 +120,6 @@
             <x-admin.sidebar-item name="users" href="/admin/users"/>
             <x-admin.sidebar-item name="categories" href="/admin/categories"/>
             <x-admin.sidebar-item name="tags" href="/admin/tags"/>
-            <x-admin.sidebar-item name="trash" href="/admin/trash"/>
             <x-admin.sidebar-item name="products" href="admin"/>
             <x-admin.sidebar-item name="kanban" class="px-2 text-gray-800 bg-gray-100" href="admin">
                 Pro

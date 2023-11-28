@@ -4,7 +4,7 @@
         <x-admin.search-form name="search"/>
     </div>
     <div class="flex items-center justify-between p-4">
-        <x-admin.bulk-actions/>
+        <x-admin.mass-delete/>
         <x-admin.create-button name="Create Tag" component="'admin.tag-modal'"/>
     </div>
     <div>
@@ -24,7 +24,7 @@
                             type="links"
                             component="'admin.tag-modal'"
                             :arguments="'tag: ' . $tag->id"
-                            :delete-method="'deleteTag('.$tag->id.')'"
+                            :delete-method="'deleteSingle('.$tag->id.')'"
                         />
                         <x-admin.table.row-item :value="$tag->slug"/>
                         <x-admin.table.row-item value="0"/>
