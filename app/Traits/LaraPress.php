@@ -24,13 +24,22 @@ trait LaraPress
 
     public array $checkedItems = [];
 
-    public bool $showTrashed = false;
+    public bool $showDeleted = false;
 
     public array $items;
 
     public function updatingSearch(): void
     {
         $this->resetPage();
+    }
+
+    public function showTrashed(): void
+    {
+        if ($this->showDeleted === true) {
+            $this->showDeleted = false;
+        } else {
+            $this->showDeleted = true;
+        }
     }
 
     public function sortBy($field): void
@@ -96,7 +105,7 @@ trait LaraPress
             return Post::when(strlen($this->search) >= 3, function ($query) {
                 return $query->where('title', 'like', '%'.$this->search.'%');
             })
-                ->when($this->showTrashed === true, function ($query) {
+                ->when($this->showDeleted === true, function ($query) {
                     return $query->onlyTrashed();
                 })
                 ->orderBy($this->sortField, $this->sortDirection)

@@ -8,36 +8,69 @@
         <x-admin.create-button name="Create Post" component="'admin.post-modal'"/>
     </div>
     <div>
+        <button wire:model="showDeleted" wire:click.prevent="showTrashed()">Show Trashed</button>
+    </div>
+    <div>
         <div class=" shadow-md sm:rounded-lg">
             <x-admin.table>
-                <x-slot name="head">
-                    <x-admin.table.head-item name="checkbox" type="checkbox"/>
-                    <x-admin.table.head-item name="title" sortable="true" sort-field="title"/>
-                    <x-admin.table.head-item name="author"/>
-                    <x-admin.table.head-item name="categories"/>
-                    <x-admin.table.head-item name="tags"/>
-                    <x-admin.table.head-item name="comments"/>
-                    <x-admin.table.head-item name="date"/>
-                </x-slot>
-                @forelse($posts as $post)
-                    <x-admin.table.row :key="$post->id">
-                        <x-admin.table.row-item :value="$post->id" type="checkbox"/>
-                        <x-admin.table.row-item
-                            :value="$post->title"
-                            type="links"
-                            component="admin.post-modal"
-                            :arguments="'post: ' . $post->id"
-                            :delete-method="'deleteSingle('.$post->id.')'"
-                        />
-                        <x-admin.table.row-item :value="$post->author->name"/>
-                        <x-admin.table.row-item :value="$post->category->name"/>
-                        <x-admin.table.row-item :value="$post->tag->name"/>
-                        <x-admin.table.row-item value="0"/>
-                        <x-admin.table.row-item value="0"/>
-                    </x-admin.table.row>
-                @empty
-                    <x-admin.table.row-item type="empty" empty-span="6" empty-message="No Posts Found."/>
-                @endforelse
+                @if($showDeleted === false)
+                    <x-slot name="head">
+                        <x-admin.table.head-item name="checkbox" type="checkbox"/>
+                        <x-admin.table.head-item name="title" sortable="true" sort-field="title"/>
+                        <x-admin.table.head-item name="author"/>
+                        <x-admin.table.head-item name="categories"/>
+                        <x-admin.table.head-item name="tags"/>
+                        <x-admin.table.head-item name="comments"/>
+                        <x-admin.table.head-item name="date"/>
+                    </x-slot>
+                    @forelse($posts as $post)
+                        <x-admin.table.row :key="$post->id">
+                            <x-admin.table.row-item :value="$post->id" type="checkbox"/>
+                            <x-admin.table.row-item
+                                :value="$post->title"
+                                type="links"
+                                component="admin.post-modal"
+                                :arguments="'post: ' . $post->id"
+                                :delete-method="'deleteSingle('.$post->id.')'"
+                            />
+                            <x-admin.table.row-item :value="$post->author->name"/>
+                            <x-admin.table.row-item :value="$post->category->name"/>
+                            <x-admin.table.row-item :value="$post->tag->name"/>
+                            <x-admin.table.row-item value="0"/>
+                            <x-admin.table.row-item value="0"/>
+                        </x-admin.table.row>
+                    @empty
+                        <x-admin.table.row-item type="empty" empty-span="6" empty-message="No Posts Found."/>
+                    @endforelse
+                @else
+                    <x-slot name="head">
+                        <x-admin.table.head-item name="checkbox" type="checkbox"/>
+                        <x-admin.table.head-item name="title" sortable="true" sort-field="title"/>
+                        <x-admin.table.head-item name="author"/>
+                        <x-admin.table.head-item name="categories" class="w-32"/>
+                        <x-admin.table.head-item name="tags" class="w-32"/>
+                        <x-admin.table.head-item name="deleted at" sortable="true" sort-field="deleted_at"/>
+                        <x-admin.table.head-item name="actions"/>
+                    </x-slot>
+                    @forelse($posts as $post)
+                        <x-admin.table.row :key="$post->id">
+                            <x-admin.table.row-item :value="$post->id" type="checkbox"/>
+                            <x-admin.table.row-item
+                                :value="$post->title"
+                                component="admin.post-modal"
+                                :arguments="'post: ' . $post->id"
+                                :delete-method="'deleteSingle('.$post->id.')'"
+                            />
+                            <x-admin.table.row-item :value="$post->author->display_name"/>
+                            <x-admin.table.row-item :value="$post->category->name"/>
+                            <x-admin.table.row-item :value="$post->tag->name"/>
+                            <x-admin.table.row-item :value="$post->deleted_at"/>
+                            <x-admin.table.row-item value="some actions"/>
+                        </x-admin.table.row>
+                    @empty
+                        <x-admin.table.row-item type="empty" empty-span="6" empty-message="No Posts Found."/>
+                    @endforelse
+                @endif
             </x-admin.table>
             <div class="px-2 py-4">{{ $posts->links() }}</div>
         </div>

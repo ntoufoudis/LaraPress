@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -28,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 })->name('home');
 
 Route::get('/dashboard', function () {
@@ -78,5 +79,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/tags', TagController::class)->name('tag.index');
         Route::get('/users', UserController::class)->name('user.index');
         Route::get('/posts', PostController::class)->name('post.index');
+        Route::get('/settings', [SettingsController::class, 'general'])->name('general.settings');
     });
 });
